@@ -19,7 +19,7 @@ public class SkillController {
     @Autowired
     private SkillRepository skillRepository;
 
-    @GetMapping
+    @RequestMapping
     public String index(Model model){
         model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
@@ -50,6 +50,7 @@ public class SkillController {
         if (optSkill.isPresent()) {
             Skill skill = (Skill) optSkill.get();
             model.addAttribute("skill", skill);
+            model.addAttribute("jobs", skill.jobs);
             return "skills/view";
         } else {
             return "redirect:../";
